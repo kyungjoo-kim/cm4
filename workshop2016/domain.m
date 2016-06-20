@@ -20,7 +20,7 @@ function [xN,xL,n,h] = domain(N,epsilon,nonlocal,local)
     a = 0; b = 0; h = 0;
 
     if nonlocal == 0
-        printf('domain:: nonlocal domain is not createdn\n');
+        fprintf('domain:: nonlocal domain is not createdn\n');
         xN = 0; n = 0;
     else
         a = nonlocal(1);
@@ -38,7 +38,7 @@ function [xN,xL,n,h] = domain(N,epsilon,nonlocal,local)
     end
 
     if local == 0
-        printf('domain:: local domain is not createdn\n');
+        fprintf('domain:: local domain is not createdn\n');
         xL = 0;
     else
         a = local(1);

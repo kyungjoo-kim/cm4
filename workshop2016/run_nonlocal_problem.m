@@ -60,4 +60,4 @@ function [errN,AN,bN,uN] = run_nonlocal_problem(N,epsilon,test)
     figure;
     spy(SN);
 
-    printf('nnz(A) = %d\n', nnz(SN));    
+    fprintf('nnz(A) = %d\n', nnz(SN));    

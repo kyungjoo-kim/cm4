@@ -22,7 +22,7 @@ function [xN,xL,n,hN,hL] = domain2(NN,NL,epsilon,nonlocal,local)
     h = 0;
     N = NN;
     if nonlocal == 0
-        printf('domain:: nonlocal domain is not createdn\n');
+        fprintf('domain:: nonlocal domain is not createdn\n');
         xN = 0; n = 0;
     else
         a = nonlocal(1);
@@ -43,7 +43,7 @@ function [xN,xL,n,hN,hL] = domain2(NN,NL,epsilon,nonlocal,local)
     h =0;
     N = NL;
     if local == 0
-        printf('domain:: local domain is not createdn\n');
+        fprintf('domain:: local domain is not createdn\n');
         xL = 0;
     else
         a = local(1);

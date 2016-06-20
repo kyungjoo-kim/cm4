@@ -55,4 +55,4 @@ function [errL,AL,bL,uL] = run_local_problem(N,epsilon,test)
     figure;
     spy(SL);
 
-    printf('nnz(A) = %d\n', nnz(SL));    
+    fprintf('nnz(A) = %d\n', nnz(SL));    

@@ -37,7 +37,7 @@ function run_comparison_local_nonlocal(N,epsilon,niter)
         theta_local_left  = exact_solution(xL(1),  test);
         theta_local_right = exact_solution(xL(end),test);
         
-        printf('local problem is running\n');
+        fprintf('local problem is running\n');
         tic;
         [AL,bL,uL,errL] = local_problem(xL,h,epsilon,...
                                         theta_local_left,theta_local_right,...
@@ -56,7 +56,7 @@ function run_comparison_local_nonlocal(N,epsilon,niter)
         theta_nonlocal_right(1:2:end) = theta_tmp(1:end-1);
         theta_nonlocal_right(2:2:end) = theta_tmp(2:end);
         
-        printf('nonlocal problem is running\n');    
+        fprintf('nonlocal problem is running\n');    
         tic;
         [AN,bN,uN,xN_plot,errN] = nonlocal_problem(xN,h,epsilon,n,...
                                                    theta_nonlocal_left,theta_nonlocal_right,...
@@ -76,7 +76,7 @@ function run_comparison_local_nonlocal(N,epsilon,niter)
             
             diff(i) = abs(u_nonlocal - u_local);
         end
-        printf('norm(diff(nonlocal,local)) = %f\n', norm(diff));
+        fprintf('norm(diff(nonlocal,local)) = %f\n', norm(diff));
 
         epsilon = epsilon/2;
     end

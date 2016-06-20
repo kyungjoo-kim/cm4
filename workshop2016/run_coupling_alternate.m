@@ -23,7 +23,7 @@ function [errN,errL] = run_coupling_alternate(NN,NL,epsilon,test)
     local_domain    = [ 0.75 1.75];
     [xN,xL,n,hN,hL] = domain2(NN,NL,epsilon,nonlocal_domain,local_domain);
 
-    printf('epsilon = %f, hN = %f, hL = %f\n', epsilon, hN, hL);
+    fprintf('epsilon = %f, hN = %f, hL = %f\n', epsilon, hN, hL);
     if (epsilon < hN)
         warning('nonlocal neighborhood (epsilon = %f) is smaller than  mesh size (h = %f)\n', ...
                 epsilon, hN);
@@ -159,7 +159,7 @@ function [errN,errL] = run_coupling_alternate(NN,NL,epsilon,test)
             lpos(1:2) = nonlocal_domain(2)+epsilon;plot(lpos,vline,'m');
             lpos(1:2) = local_domain(1);           plot(lpos,vline,'k:');
             hold off;
-            printf('[Enter] to continue ...\n');
+            fprintf('[Enter] to continue ...\n');
             pause;
         end
         
@@ -176,15 +176,15 @@ function [errN,errL] = run_coupling_alternate(NN,NL,epsilon,test)
             break;
         end
 
-        printf('iter = %d, rate = %f, err(local,nonlocal) = %f, %f\n' ...
+        fprintf('iter = %d, rate = %f, err(local,nonlocal) = %f, %f\n' ...
                , iter, rate, errL, errN);
     end
     toc;
     
     if converged
-        printf('converged\n');
+        fprintf('converged\n');
     else
-        printf('reached max number of iteration %d\n', max_iter);        
+        fprintf('reached max number of iteration %d\n', max_iter);        
     end
     
     figure;

@@ -24,7 +24,7 @@ function [errN,errL] = run_coupling_optimize(NN,NL,epsilon,test)
     overlap_domain  = [ local_domain(1) nonlocal_domain(2)+epsilon];
     [xN,xL,n,hN,hL] = domain2(NN,NL,epsilon,nonlocal_domain,local_domain); 
 
-    printf('epsilon = %f, hN = %f, hL = %f\n', epsilon, hN, hL);
+    fprintf('epsilon = %f, hN = %f, hL = %f\n', epsilon, hN, hL);
     if (epsilon < hN)
         warning('nonlocal neighborhood (epsilon = %f) is smaller than  mesh size (h = %f)\n', ...
                 epsilon, hN);
