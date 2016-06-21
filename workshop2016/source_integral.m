@@ -43,7 +43,7 @@ function value = source_integral(i,v,x,h,epsilon,test,flag)
         f = (v-.5).^3;
       case 6
         if (flag == true)
-            f = 2*sin(80*v/pi)./(v.^2); % -6.*v;
+            f = 2*sin(80*v/pi)./v; % -6.*v;
         else
             f = 0;
         end
