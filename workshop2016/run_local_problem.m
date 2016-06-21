@@ -52,7 +52,7 @@ function [errL,AL,bL,uL] = run_local_problem(N,epsilon,test)
     toc;
     
     figure;
-    plot(xL,uL,'k-*');
+    plot(xL,uL,'k-+');
 
     SL = sparse(AL);
 

@@ -57,7 +57,7 @@ function [errN,AN,bN,uN] = run_nonlocal_problem(N,epsilon,test)
     toc;
     
     figure;
-    plot(xN_plot,uN,'r+');
+    plot(xN_plot,uN,'r*');
 
     SN = sparse(AN);
 

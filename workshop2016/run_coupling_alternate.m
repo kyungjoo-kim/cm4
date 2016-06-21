@@ -109,7 +109,7 @@ function [errN,errL] = run_coupling_alternate(NN,NL,epsilon,test)
 
     % initial condition plot
     figure;
-    plot(xL,uL,'k-',xN_plot,uN,'r-','Linewidth',4); 
+    plot(xL,uL,'k-',xN_plot,uN,'r*','Linewidth',4); 
     vline=get(gca,'ylim');
     hold on;
     lpos(1:2) = nonlocal_domain(2);        plot(lpos,vline,'r');
@@ -163,7 +163,7 @@ function [errN,errL] = run_coupling_alternate(NN,NL,epsilon,test)
 
         if (print)
             figure(10);
-            plot(xL,uL,'k-',xN_plot,uN,'r-','Linewidth',4);         
+            plot(xL,uL,'k-',xN_plot,uN,'r*','Linewidth',4);         
             hold on;
             vline=get(gca,'ylim');
             lpos(1:2) = nonlocal_domain(2);        plot(lpos,vline,'r');
@@ -199,7 +199,7 @@ function [errN,errL] = run_coupling_alternate(NN,NL,epsilon,test)
     end
     
     figure;
-    plot(xL,uL,'k-',xN_plot,uN,'r-','Linewidth',4);         
+    plot(xL,uL,'k-',xN_plot,uN,'r*','Linewidth',4);         
     vline=get(gca,'ylim');
     hold on;
     lpos(1:2) = nonlocal_domain(2);        plot(lpos,vline,'r');

@@ -102,7 +102,7 @@ function [errN,errL] = run_coupling_optimize(NN,NL,epsilon,test)
                            reuse,print,accuracy,test);
 
     figure;
-    plot(xL,uL,'k-',xN_plot,uN,'r-','Linewidth',4);
+    plot(xL,uL,'k-',xN_plot,uN,'r*','Linewidth',4);
     vline=get(gca,'ylim');
     hold on;
     lpos(1:2) = nonlocal_domain(2);        plot(lpos,vline,'r');
@@ -138,7 +138,7 @@ function [errN,errL] = run_coupling_optimize(NN,NL,epsilon,test)
     toc
     
     figure;
-    plot(xL,uL,'k-',xN_plot,uN,'r-','Linewidth',4);
+    plot(xL,uL,'k-',xN_plot,uN,'r*','Linewidth',4);
     vline=get(gca,'ylim');
     hold on;
     lpos(1:2) = nonlocal_domain(2);        plot(lpos,vline,'r');

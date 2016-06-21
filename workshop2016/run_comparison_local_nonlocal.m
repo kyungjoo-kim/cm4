@@ -66,7 +66,7 @@ function run_comparison_local_nonlocal(N,epsilon,niter)
                                                    reuse,print,accuracy,test);
         toc;
         
-        plot(xL,uL,'k-*',xN_plot,uN,'r-+');
+        plot(xL,uL,'k-+',xN_plot,uN,'r-*');
         pause;
         
         % difference at cell centers
