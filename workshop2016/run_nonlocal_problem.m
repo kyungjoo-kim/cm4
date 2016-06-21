@@ -1,18 +1,22 @@
-%*************************************************************************%
-%                                                                         %
-%  This function solves the optimization-based local-nonlocal coupling    %
-%  problem using the built-in Matlab function fminunc.m                   %
-%                                                                         %
-%  Author: Marta D'Elia                                                   %
-%                                                                         %
-%  Modified: 01-06-2016                                                   %
-%                                                                         %
-%  NOTE 1: h is THE SAME for nonlocal and local problems                  %
-%                                                                         %
-%  NOTE 2: nonlocal discretization - piecewise linear Disc Galerkin       %
-%          local discretization - piecewise linear Cont Galerkin          %
-%                                                                         %
-%*************************************************************************%
+% The code solves a nonlocal 1D poisson problem. 
+%
+% [errN, AN, bN, uN] = run_nonlocal_problem(N, epsilon, test)
+% * Input
+%   - N: # of elements
+%   - epsilon: interaction radius
+%   - test: problem id
+%     0 -> a source function with discontinuity
+%     1 -> problem with a manufactured solution u = x
+%     2 -> problem with a manufactured solution u = x^2
+%     3 -> problem with a manufactured solution u = x^3
+%     4 -> problem with a manufactured solution u = x^2 - x^4
+% * Output 
+%   - errN: nonlocal error with respect to manufactured solutions
+%   - AN: nonlocal stiffness matrix
+%   - bN: load vector
+%   - uN: solution vector
+%
+%  Author: Marta D'Elia
 function [errN,AN,bN,uN] = run_nonlocal_problem(N,epsilon,test)
     close all;
     more off;
@@ -53,7 +57,7 @@ function [errN,AN,bN,uN] = run_nonlocal_problem(N,epsilon,test)
     toc;
     
     figure;
-    plot(xN_plot,uN,'r-+');
+    plot(xN_plot,uN,'r+');
 
     SN = sparse(AN);
 

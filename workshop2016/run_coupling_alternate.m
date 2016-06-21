@@ -1,18 +1,22 @@
-%*************************************************************************%
-%                                                                         %
-%  This function solves the optimization-based local-nonlocal coupling    %
-%  problem using the built-in Matlab function fminunc.m                   %
-%                                                                         %
-%  Author: Marta D'Elia                                                   %
-%                                                                         %
-%  Modified: 01-06-2016                                                   %
-%                                                                         %
-%  NOTE 1: h is THE SAME for nonlocal and local problems                  %
-%                                                                         %
-%  NOTE 2: nonlocal discretization - piecewise linear Disc Galerkin       %
-%          local discretization - piecewise linear Cont Galerkin          %
-%                                                                         %
-%*************************************************************************%
+% The code solves a problem hybridized with local and nonlocal
+% operators using the alternating Schwarz method.
+%
+% [errN,errL] = run_coupling_alternate(NN, NL, epsilon,test)
+% * Input
+%   - NN: # of elements in "nonlocal_domain", see variable in the code
+%   - NL: # of elements in "local_domain", see variable in the code
+%   - epsilon: interaction radius, dummy for test 1 - 4
+%   - test: problem id
+%     0 -> a source function with discontinuity
+%     1 -> problem with a manufactured solution u = x
+%     2 -> problem with a manufactured solution u = x^2
+%     3 -> problem with a manufactured solution u = x^3
+%     4 -> problem with a manufactured solution u = x^2 - x^4
+% * Output 
+%   - errN: nonlocal error with respect to manufactured solutions
+%   - errL: local error with respect to manufactured solutions
+%
+%  Author: Marta D'Elia
 function [errN,errL] = run_coupling_alternate(NN,NL,epsilon,test)
     close all;
     more off;
@@ -21,8 +25,15 @@ function [errN,errL] = run_coupling_alternate(NN,NL,epsilon,test)
     problem_domain  = [ 0    1.75];
     nonlocal_domain = [ 0    1   ];
     local_domain    = [ 0.75 1.75];
-    [xN,xL,n,hN,hL] = domain2(NN,NL,epsilon,nonlocal_domain,local_domain);
 
+    %% for now optimization based coupling reqruies to put a point
+    %% at the interface (match the same condition for alternate version)
+    h = (local_domain(1) - nonlocal_domain(1))/NN;
+    NN = round(nonlocal_domain(2)/h);
+    nonlocal_domain(2) = h*NN;
+
+    [xN,xL,n,hN,hL] = domain2(NN,NL,epsilon,nonlocal_domain,local_domain);
+    
     fprintf('epsilon = %f, hN = %f, hL = %f\n', epsilon, hN, hL);
     if (epsilon < hN)
         warning('nonlocal neighborhood (epsilon = %f) is smaller than  mesh size (h = %f)\n', ...
@@ -34,9 +45,9 @@ function [errN,errL] = run_coupling_alternate(NN,NL,epsilon,test)
 
     %%% initializing the control ----------------------------------------------
     accuracy   = true;
-    print      = true;
+    print      = false;
     reuse      = false;
-    use_coarse_solution = false;
+    use_cheap_solution = true;
     t          = 1.0; %% relaxation parameter (0,1]
     
     % local model boundary
@@ -52,8 +63,8 @@ function [errN,errL] = run_coupling_alternate(NN,NL,epsilon,test)
     theta_nonlocal_right = zeros(2*n,1) + 1.5; %% arbitrary value
     theta_nonlocal_right_tmp = zeros(n+1,1);
 
-    % use coarse solution for initial guess
-    if (use_coarse_solution)
+    % use cheap solution for initial guess
+    if (use_cheap_solution)
         [dummy,xA,dummy,hA] = domain(NL,epsilon,0,problem_domain);
 
         theta_all_left  = exact_solution(xA(1),  test);

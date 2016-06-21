@@ -1,18 +1,21 @@
-%*************************************************************************%
-%                                                                         %
-%  This function solves the optimization-based local-nonlocal coupling    %
-%  problem using the built-in Matlab function fminunc.m                   %
-%                                                                         %
-%  Author: Marta D'Elia                                                   %
-%                                                                         %
-%  Modified: 01-06-2016                                                   %
-%                                                                         %
-%  NOTE 1: h is THE SAME for nonlocal and local problems                  %
-%                                                                         %
-%  NOTE 2: nonlocal discretization - piecewise linear Disc Galerkin       %
-%          local discretization - piecewise linear Cont Galerkin          %
-%                                                                         %
-%*************************************************************************%
+% The code demonstrates that a nonlocal operator converges to a
+% local operator with a decreasing epsilon.
+%
+% run_comparison_local_nonlocal(N, epsilon, niter)
+% * Input
+%   - N: # of elements
+%   - epsilon: interaction radius
+%   - niter: # of iteration to bisect epsilon
+%
+%     for iter=1:niter
+%       solve local and nonlocal problem 
+%       epsilon = epsilon / 2
+%     end
+%
+% * Output 
+%   - plot the result for each iteration
+%
+%  Author: Marta D'Elia
 function run_comparison_local_nonlocal(N,epsilon,niter)
     close all;
     more off;
