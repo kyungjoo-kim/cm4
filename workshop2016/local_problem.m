@@ -22,6 +22,7 @@
 % test - problem case
 function [A,b,u,err] = local_problem(x,h,epsilon,theta_left,theta_right,reuse,print,accuracy,test)
 
+    hidden_flag = false;
     %%% matrix --------------------------------------------------------------
     N = length(x);
     A = zeros(N, N);
@@ -50,8 +51,8 @@ function [A,b,u,err] = local_problem(x,h,epsilon,theta_left,theta_right,reuse,pr
     b = zeros(N,1);
     epsilon = epsilon*(test==0);
     for i=1:N-1
-        b(i)   = b(i)     + quadgk(@(v)source_integral(i,  v,x,h,epsilon,test),x(i),x(i+1),'RelTol',1e-10);
-        b(i+1) = b(i+1)   + quadgk(@(v)source_integral(i+1,v,x,h,epsilon,test),x(i),x(i+1),'RelTol',1e-10);
+        b(i)   = b(i)     + quadgk(@(v)source_integral(i,  v,x,h,epsilon,test,hidden_flag),x(i),x(i+1),'RelTol',1e-10);
+        b(i+1) = b(i+1)   + quadgk(@(v)source_integral(i+1,v,x,h,epsilon,test,hidden_flag),x(i),x(i+1),'RelTol',1e-10);
     end
 
     % boundary modification

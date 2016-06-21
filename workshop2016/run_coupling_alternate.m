@@ -25,7 +25,7 @@ function [errN,errL] = run_coupling_alternate(NN,NL,epsilon,test)
     problem_domain  = [ 0    1.75];
     nonlocal_domain = [ 0    1   ];
     local_domain    = [ 0.75 1.75];
-
+    
     %% for now optimization based coupling reqruies to put a point
     %% at the interface (match the same condition for alternate version)
     h = (local_domain(1) - nonlocal_domain(1))/NN;

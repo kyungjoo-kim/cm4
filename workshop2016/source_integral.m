@@ -14,7 +14,15 @@
 %                                                                         %
 %*************************************************************************%
 % for local operator epsilon should be zero
-function value = source_integral(i,v,x,h,epsilon,test)
+function value = source_integral(i,v,x,h,epsilon,test,flag)
+    if nargin > 7
+        error('source_integral: wrong number of input');
+    end
+    if (nargin == 7)
+    else
+        flag = true;
+    end
+    
     switch test
       case 0
         f = (v<0.5-epsilon).*0 + ...
@@ -33,6 +41,12 @@ function value = source_integral(i,v,x,h,epsilon,test)
         %% arbitrary source term (p>=3) for comparing local and
         %% nonlocal operators
         f = (v-.5).^3;
+      case 6
+        if (flag == true)
+            f = 2*sin(80*v/pi)./(v.^2); % -6.*v;
+        else
+            f = 0;
+        end
     end
     ph_v  = 0;
     if (abs(v-x(i)) <= h)

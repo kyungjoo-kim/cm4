@@ -29,4 +29,7 @@ function value = exact_solution(x,test)
       case 5
         %% this is used for creating boundary condition only
         value = x.*0;
+      case 6
+        %% this is used for creating boundary condition only
+        value = x.*0;
     end
