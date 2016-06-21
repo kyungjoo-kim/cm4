@@ -47,7 +47,7 @@ function [errN,errL] = run_coupling_alternate(NN,NL,epsilon,test)
     accuracy   = true;
     print      = false;
     reuse      = false;
-    use_cheap_solution = true;
+    use_cheap_solution = false;
     t          = 1.0; %% relaxation parameter (0,1]
     
     % local model boundary
